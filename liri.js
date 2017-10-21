@@ -40,6 +40,7 @@ function spotifyThisSong(){
 			console.log("Title: " + songInfo[i].name)
 			console.log("Album: " + songInfo[i].album.name)
 			console.log("Link: " + songInfo[i].preview_url)
+			return
 		}
 	})
 }
@@ -61,9 +62,7 @@ function movieThis(){
 			console.log("Plot: " + JSON.parse(body).Plot)
 			console.log("Cast: " + JSON.parse(body).Actors)
 		}
-		else{
 
-		}
 	})
 
 }
