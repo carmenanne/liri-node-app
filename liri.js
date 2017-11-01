@@ -1,6 +1,9 @@
 var keyList = require('./keys.js');
-var Twitter = require('twitter');
-var Spotify = require('node-spotify-api');
+// Since you're initializing your Twitter and Spotify 
+// clients in your keys file, you can skip loading those
+// packages in this file.
+// var Twitter = require('twitter');
+// var Spotify = require('node-spotify-api');
 var request = require('request');
 var fs = require('fs');
 
@@ -11,6 +14,7 @@ var client = keyList.twitterKeys;
 			console.log(error);
 		}
 		else{
+			// you should feel free to omit the parentheses that are wrapping the entire JSON.parse call
 			var a = (JSON.parse(response.body));
 			var tweetInfo = a.statuses
 			for (i = 0; i < tweetInfo.length; i++){
@@ -27,8 +31,12 @@ function spotifyThisSong(){
 	var spotify = keyList.spotify;
 	
 	var song = process.argv[3]
+	// instead of using this if statement to ensure 
+	// that song has a value, you can use the or `||`
+	// operator when you declare song like so:
+	// var song = process.argv[3] || 'The-Sign'
 		if (!song){
-			song ='The-Sign'
+			song ='The Sign'
 		}	
 	spotify.search({type: 'track', query: song}, function(err, data){
 		if (err){
@@ -47,6 +55,7 @@ function spotifyThisSong(){
 
 
 function movieThis(){
+	// same note here about using the or operator for setting defaults
 	var movie = process.argv[3]
 	if (!movie){
 		movie = 'Mr-Nobody'
@@ -80,6 +89,14 @@ function doWhatItSays(){
 		var prompt = results[1].replace( / /g, '-', 5)
 		console.log(prompt)
 
+		// In theory, random.txt could have a command other than spotify-this-song
+		// so a better approach would be to rerun the if/else if/else logic that
+		// you've written at the end of this file. You could either copy and paste it
+		// or a better approach would be to put it in a function that you could
+		// easily and conveniently reuse 🤓
+		// You'd also need to modify your spotifyThisSong and movieThis to accept
+		// an argument to search for instead of just checking process.argv[3]
+		// since there probably wouldn't be anything set for that in this case.
 		return spotifyThisSong();
 	})
 }

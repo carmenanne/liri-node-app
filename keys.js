@@ -3,6 +3,10 @@ var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
 var request = require('request');
 
+// This variable name is somewhat misleading - it makes it seem as though it
+// holds a collection of keys needed initialize an interaction with twitter, but in 
+// actuality it's an already initialized client so a name such as `twitterClient` 
+// would be more appropriate.
 var twitterKeys = new Twitter({
 	consumer_key: '7lQSIICRZWhFoDAYzxGqntnXt',
 	consumer_secret: 'WsQobBeL91Ek3fY6KnhZRRDNDSEwanJ66y6orGObONnDpFcqxo',
